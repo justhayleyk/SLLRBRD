@@ -1,2 +1,2 @@
-# Project-1_HRR
-Project #1 - Created by Hayley, Randall and Rene
+# Project-1_HKRR
+Project #1 - Created by Hayley, Kareem, Randall and Rene
