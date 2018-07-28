@@ -35,7 +35,6 @@ var userID = 'Sandra';
       url: etsyURL,
       dataType: 'jsonp',
       success: function(data) {
-        console.log(data);
         if (data.ok) {
           $.each(data.results, function(i, item) {
             // get Title
