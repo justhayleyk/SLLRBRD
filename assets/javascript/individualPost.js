@@ -13,10 +13,10 @@ $(document).ready(function() {
   var db = firebase.database();
 
   // GLOBAL VARIABLE
-  var imageURL = '';
-  var description = '';
-  var title = '';
-  var price = 0;
+  var imageURL;
+  var description;
+  var title;
+  var price;
   var userID;
 
   // Pull from database
