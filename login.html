@@ -48,7 +48,7 @@
           Log-in to your account
         </div>
       </h2>
-      <form class="ui large form " id="loginForm">
+      <div class="ui large form " id="loginForm">
         <div class="ui stacked segment ">
           <div class="field ">
             <div class="ui left icon input ">
@@ -62,12 +62,26 @@
               <input type="password" id="password" name="password " placeholder="Password ">
             </div>
           </div>
-          <input type="submit" class="ui fluid large teal submit button " value="Login">
+          <div class="field ">
+            <button id="login" class="ui fluid large primary submit button">
+              Login
+            </button>
+          </div>
+          <div class="field ">
+            <button id="signUp" class="ui fluid large secondary submit button">
+              Sign Up
+            </button>
+          </div>
+          <div class="field ">
+            <button id="logout" class="ui fluid large primary secondary button">
+              Logout
+            </button>
+          </div>
         </div>
 
         <div class="ui error message "></div>
 
-      </form>
+      </div>
 
       <div class="ui message ">
         New to us?
@@ -79,57 +93,70 @@
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
   <script>
 
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDcOMILm8F_Mx8SD8B-SYkgGTxnTQ4nFXE",
+      authDomain: "sb-sllrbrd.firebaseapp.com",
+      databaseURL: "https://sb-sllrbrd.firebaseio.com",
+      projectId: "sb-sllrbrd",
+      storageBucket: "sb-sllrbrd.appspot.com",
+      messagingSenderId: "407280221848"
+    };
+    firebase.initializeApp(config);
+
+    // REAL-TIME LISTENER
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(user)
+
+        $("#login").attr("style", "display:none");
+        $("#logout").attr("style", "");
+        $("#signUp").attr("style", "display:none");
+      } else {
+        // No user is signed in.
+        $("#logout").attr("style", "display:none");
+        $("#signUp").attr("style", "");
+        $("#login").attr("style", "");
+      }
+    });
     $(document).ready(function () {
 
-      $(document)
-        .ready(function () {
-          $('.ui.form')
-            .form({
-              fields: {
-                email: {
-                  identifier: 'email',
-                  rules: [
-                    {
-                      type: 'empty',
-                      prompt: 'Please enter your e-mail'
-                    },
-                    {
-                      type: 'email',
-                      prompt: 'Please enter a valid e-mail'
-                    }
-                  ]
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier: 'email',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your e-mail'
                 },
-                password: {
-                  identifier: 'password',
-                  rules: [
-                    {
-                      type: 'empty',
-                      prompt: 'Please enter your password'
-                    }
-                  ]
+                {
+                  type: 'email',
+                  prompt: 'Please enter a valid e-mail'
                 }
-              }
-            })
-            ;
+              ]
+            },
+            password: {
+              identifier: 'password',
+              rules: [
+                {
+                  type: 'empty',
+                  prompt: 'Please enter your password'
+                }
+              ]
+            }
+          }
         })
         ;
 
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyDcOMILm8F_Mx8SD8B-SYkgGTxnTQ4nFXE",
-        authDomain: "sb-sllrbrd.firebaseapp.com",
-        databaseURL: "https://sb-sllrbrd.firebaseio.com",
-        projectId: "sb-sllrbrd",
-        storageBucket: "sb-sllrbrd.appspot.com",
-        messagingSenderId: "407280221848"
-      };
-      firebase.initializeApp(config);
-
-      $("#loginForm").submit(function (event) {
+      // LOGIN LISTENER
+      $("#login").click(function (event) {
         event.preventDefault();
         var email = $("#email").val().trim();
         var pwd = $("#password").val().trim();
 
+        // LOGIN FUNCTION
         firebase.auth().signInWithEmailAndPassword(email, pwd).catch(function (error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -144,6 +171,18 @@
           // [END_EXCLUDE]
         });
       });
+
+      // LOGOUT LISTENER
+      $("#logout").click(function (event) {
+        event.preventDefault();
+        console.log("logout test")
+        firebase.auth().signOut().then(function () {
+          // Sign-out successful.
+        }).catch(function (error) {
+          // An error happened.
+        });
+      });
+
     });
 
   </script>
