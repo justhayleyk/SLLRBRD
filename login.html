@@ -107,18 +107,23 @@
     // REAL-TIME LISTENER
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
-        console.log(user)
-
-        $("#login").attr("style", "display:none");
+        $("#login, #signUp, #password").attr("style", "display:none");
         $("#logout").attr("style", "");
-        $("#signUp").attr("style", "display:none");
+        $("#email").val(user.email)
+
       } else {
         // No user is signed in.
         $("#logout").attr("style", "display:none");
-        $("#signUp").attr("style", "");
-        $("#login").attr("style", "");
+        $("#signUp, #login, #password").attr("style", "");
+        $("#email").val("");
+
       }
     });
+
+    // Variable Declarations
+    var email = "";
+    var pwd = "";
+
     $(document).ready(function () {
 
       $('.ui.form')
@@ -153,8 +158,8 @@
       // LOGIN LISTENER
       $("#login").click(function (event) {
         event.preventDefault();
-        var email = $("#email").val().trim();
-        var pwd = $("#password").val().trim();
+        email = $("#email").val().trim();
+        pwd = $("#password").val().trim();
 
         // LOGIN FUNCTION
         firebase.auth().signInWithEmailAndPassword(email, pwd).catch(function (error) {
@@ -180,6 +185,20 @@
           // Sign-out successful.
         }).catch(function (error) {
           // An error happened.
+        });
+      });
+
+      // SIGN UP  LISTENER
+      $("#signUp").click(function (event) {
+        event.preventDefault();
+        email = $("#email").val().trim();
+        pwd = $("#password").val().trim();
+        console.log("CREATE USER TEST")
+        firebase.auth().createUserWithEmailAndPassword(email, pwd).catch(function (error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
         });
       });
 
