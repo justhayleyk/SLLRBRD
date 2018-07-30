@@ -21,7 +21,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     $('#logout').attr('style', '');
     $('#email').val(user.email);
     sessionUser = user;
-    window.location = 'index.html'; //After successful login, user will be redirected to home.html
+    // CONTROL REDIRECT AFTER SUCCESSFUL AUTHENTICATION
+    // window.location = 'index.html'; //After successful login, user will be redirected to home.html
   } else {
     // No user is signed in.
     $('#logout').attr('style', 'display:none');
