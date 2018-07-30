@@ -104,13 +104,20 @@
     };
     firebase.initializeApp(config);
 
+    // Variable Declarations
+    var email = "";
+    var pwd = "";
+    var sessionUser;
+
     // REAL-TIME LISTENER
     firebase.auth().onAuthStateChanged(function (user) {
+
       if (user) {
         $("#login, #signUp, #password").attr("style", "display:none");
         $("#logout").attr("style", "");
         $("#email").val(user.email)
-
+        sessionUser = user;
+        window.location = 'index.html'; //After successful login, user will be redirected to home.html
       } else {
         // No user is signed in.
         $("#logout").attr("style", "display:none");
@@ -119,10 +126,6 @@
 
       }
     });
-
-    // Variable Declarations
-    var email = "";
-    var pwd = "";
 
     $(document).ready(function () {
 
@@ -174,6 +177,7 @@
           }
           console.log(error);
           // [END_EXCLUDE]
+
         });
       });
 
