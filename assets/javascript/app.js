@@ -74,6 +74,23 @@ $(document).ready(function() {
     var imgName = $('#image')
       .val()
       .trim();
+
+      if (userID.length > 0 && title.length > 0 && imgName.length > 0 && description.length > 0 && price.length > 0) {
+
+        var adID = dbRef.push().key;
+        var imgPath = '/images/' + adID + '/';
+        var fileName = file.name;
+        var imgURL = imgPath + fileName;
+        var sRef = store.ref(imgURL);
+
+        sRef.put(file).then(function () {
+
+          console.log("Image upload successful");
+          return sRef.getDownloadURL();
+
+        })
+
+        
   }
 
   // bottom of on document ready
