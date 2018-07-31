@@ -133,7 +133,7 @@ $(document).ready(function() {
         } else {
           alert(errorMessage);
         }
-        console.log(error);
+        // console.log(error);
         // [END_EXCLUDE]
       });
   });
@@ -141,7 +141,6 @@ $(document).ready(function() {
   // LOGOUT LISTENER
   $('#logout').click(function(event) {
     event.preventDefault();
-    console.log('logout test');
     firebase
       .auth()
       .signOut()
@@ -162,7 +161,6 @@ $(document).ready(function() {
     pwd = $('#password')
       .val()
       .trim();
-    console.log('CREATE USER TEST');
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, pwd)
