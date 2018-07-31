@@ -75,22 +75,42 @@ $(document).ready(function() {
       .val()
       .trim();
 
-      if (userID.length > 0 && title.length > 0 && imgName.length > 0 && description.length > 0 && price.length > 0) {
+    if (
+      userID.length > 0 &&
+      title.length > 0 &&
+      imgName.length > 0 &&
+      description.length > 0 &&
+      price.length > 0
+    ) {
+      var adID = dbRef.push().key;
+      var imgPath = '/images/' + adID + '/';
+      var fileName = file.name;
+      var imgURL = imgPath + fileName;
+      var sRef = store.ref(imgURL);
 
-        var adID = dbRef.push().key;
-        var imgPath = '/images/' + adID + '/';
-        var fileName = file.name;
-        var imgURL = imgPath + fileName;
-        var sRef = store.ref(imgURL);
-
-        sRef.put(file).then(function () {
-
-          console.log("Image upload successful");
+      sRef
+        .put(file)
+        .then(function() {
+          console.log('Image upload successful');
           return sRef.getDownloadURL();
-
         })
+        .then(function(imageURL) {
+          console.log('url:' + imageURL);
+          console.log('Download URL acquired successfully');
 
-        
+          var ad = {
+            userID: userID,
+            title: title,
+            imageURL: imageURL,
+            description: description,
+            price: price,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          };
+
+          var adRef = dbRef.child(adID);
+          adRef.update(ad);
+        });
+    }
   }
 
   // bottom of on document ready
