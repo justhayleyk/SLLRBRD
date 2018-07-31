@@ -46,7 +46,7 @@ var userID = 'Sandra';
             // get Price
             price = item.price;
             // Push resulting Arrary into Global Array
-            db.ref().push({
+            db.ref('/ads/').push({
               imageURL: imageURL,
               description: description,
               price: price,

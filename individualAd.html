@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,18 +16,22 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
-  <!-- etsyAPI -->
-<<<<<<< HEAD
-  <script src="etsyAPI.js"></script>
-  <script src="firebase.js"></script>
-=======
-  <!-- <script src="etsyAPI.js"></script> -->
   <!-- app.js file -->
-  <script src="assets/javascript/app.js"></script>
-
->>>>>>> master
+  <!-- <script src="assets/javascript/app.js"></script> -->
+  <script src="assets/javascript/individualAd.js"></script>
 
   <title>Project #1</title>
+
+  <script>
+
+    // var urlParams = new URLSearchParams(window.location.search);
+
+    // console.log(urlParams.has('postid')); // true
+    // console.log(urlParams.get('postid')); // "edit"
+
+
+  </script>
+
 </head>
 
 <body>
@@ -38,13 +41,10 @@
         <img style="width: 250px;" id="logo" src="assets/images/Sllrbrd.png" alt="SLLRBRD Logo">
       </div>
       <div class="right item">
-        <a href="login.html" class="item">
+        <a class="item">
           Login
         </a>
-        <a href="login.html" class="item">
-          Logout
-        </a>
-        <a href="login.html" class="item">
+        <a class="item">
           Sign Up
         </a>
         <a class="item">
@@ -60,9 +60,17 @@
 
   <div class="ui container">
 
-    <div class="postItem ui card">
-      <!-- CONTENT WILL ADD HERE -->
+
+
+    <div class="individualAd ui grid">
+
     </div>
+
+
+
+
+
+
 
   </div>
 
@@ -85,6 +93,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
 </body>
 
 </html>
