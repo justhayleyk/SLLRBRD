@@ -13,30 +13,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
+  <!--Semantic -->
+  <script src="assets/javascript/semantic.min.js"></script>
   <!-- Site Properties -->
   <title>Sllrbrd - Login In</title>
-  <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/site.css">
 
-  <link rel="stylesheet" type="text/css" href="../dist/components/container.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/grid.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/header.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/image.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/menu.css">
-
-  <link rel="stylesheet" type="text/css" href="../dist/components/divider.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/form.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/input.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/button.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/list.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/message.css">
-  <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
-
-  <script src="assets/library/jquery.min.js"></script>
-  <script src="../dist/components/form.js"></script>
-  <script src="../dist/components/transition.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+  <script src="assets/javascript/app.js"></script>
 
   <style type="text/css">
     body {
@@ -55,47 +38,6 @@
       max-width: 450px;
     }
   </style>
-  <script>
-    $(document)
-      .ready(function () {
-        $('.ui.form')
-          .form({
-            fields: {
-              email: {
-                identifier: 'email',
-                rules: [
-                  {
-                    type: 'empty',
-                    prompt: 'Please enter your e-mail'
-                  },
-                  {
-                    type: 'email',
-                    prompt: 'Please enter a valid e-mail'
-                  }
-                ]
-              },
-              password: {
-                identifier: 'password',
-                rules: [
-                  {
-                    type: 'empty',
-                    prompt: 'Please enter your password'
-                  },
-                  {
-                    type: 'length[6]',
-                    prompt: 'Your password must be at least 6 characters'
-                  }
-                ]
-              }
-            }
-          })
-          ;
-      })
-      ;
-  </script>
-
-  <!-- app.js file -->
-  <script src="assets/javascript/app.js"></script>
 </head>
 
 <body>
@@ -103,7 +45,6 @@
   <div class="ui middle aligned center aligned grid">
     <div class="column">
       <h2 class="ui teal image header">
-        <!-- <img src="assets/images/Sllrbrd.png" class="image"> -->
         <div>
           <img class="ui medium image" src="assets/images/Sllrbrd.png">
         </div>
@@ -111,33 +52,46 @@
           Log-in to your account
         </div>
       </h2>
-      <form class="ui large form ">
+      <div class="ui large form " id="loginForm">
         <div class="ui stacked segment ">
           <div class="field ">
             <div class="ui left icon input ">
               <i class="user icon "></i>
-              <input type="text " name="email " placeholder="E-mail address ">
+              <input type="text" id="email" name="email " placeholder="E-mail address ">
             </div>
           </div>
           <div class="field ">
             <div class="ui left icon input ">
               <i class="lock icon "></i>
-              <input type="password " name="password " placeholder="Password ">
+              <input type="password" id="password" name="password " placeholder="Password ">
             </div>
           </div>
-          <div class="ui fluid large teal submit button ">Login</div>
+          <div class="field ">
+            <button id="login" class="ui fluid large primary submit button">
+              Login
+            </button>
+          </div>
+          <div class="field ">
+            <button id="signUp" class="ui fluid large secondary submit button">
+              Sign Up
+            </button>
+          </div>
+          <div class="field ">
+            <button id="logout" class="ui fluid large primary secondary button">
+              Logout
+            </button>
+          </div>
         </div>
 
         <div class="ui error message "></div>
-
-      </form>
-
-      <div class="ui message ">
-        New to us?
-        <a href="# ">Sign Up</a>
+        <div class="ui message ">
+          <div class="ui message ">
+            <a href="index.html">Home</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
 
 </body>
 
