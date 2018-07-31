@@ -109,6 +109,13 @@ $(document).ready(function() {
 
           var adRef = dbRef.child(adID);
           adRef.update(ad);
+        })
+        .then(function() {
+          console.log('Successfully saved to database.');
+          $('#postForm')[0].reset();
+        })
+        .catch(function(error) {
+          console.log('Error:' + error);
         });
     }
   }
