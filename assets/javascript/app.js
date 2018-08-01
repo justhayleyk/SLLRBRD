@@ -317,12 +317,16 @@ $(document).ready(function() {
   // bottom of on document ready
 });
 
+// =========================
+// ======= Navigation ======
+// =========================
+
 function displayNav(x) {
   var html = '';
   if (x === true) {
     // User who is signed in
     html =
-      '<a href="login.html" class="item">Logout</a><a href="postAnAd.html" class="item">Post An Ad</a>';
+      '<a href="MyAds.html" class="item">My Ads</a><a href="postAnAd.html" class="item">Post An Ad</a><a href="login.html" class="item">Logout</a>';
   } else {
     // No User
     html =
