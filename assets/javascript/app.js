@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   } else {
     displayNav(false);
     // No user is signed in.
-    $('#logout').attr('style', 'display:none');
+    $('#logout').attr('style', 'dis   play:none');
     $('#signUp, #login, #password').attr('style', '');
     $('#email').val('');
   }
@@ -248,7 +248,6 @@ $(document).ready(function() {
 });
 
 function displayNav(x) {
-  console.log(x);
   var html = '';
   if (x === true) {
     // User who is signed in
