@@ -79,12 +79,13 @@ $(document).ready(function() {
     });
   });
 
-  // PostAd function
+  // ================================
+  // =========PostAd function========
+  // ================================
 
   $('#submitAd').on('click', function() {
     event.preventDefault();
-    authUser = 'HayleyKareemRandallRene'; //set this to currentUser
-    postAd(authUser);
+    postAd(sessionUser);
   });
 
   function postAd(currentUser) {
