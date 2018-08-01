@@ -58,6 +58,14 @@ $(document).ready(function() {
     });
   });
 
+  // PostAd function
+
+  $('#submitAd').on('click', function() {
+    event.preventDefault();
+    authUser = 'HayleyKareemRandallRene'; //set this to currentUser
+    postAd(authUser);
+  });
+
   function postAd(currentUser) {
     var userID = currentUser;
     var dbRef = db.ref('ads');
