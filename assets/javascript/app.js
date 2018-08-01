@@ -49,9 +49,13 @@ $(document).ready(function() {
   var postprice;
   var postuserID;
   var html = '';
+  var fName = '';
+  var lName = '';
+  var phone = '';
 
   var db = firebase.database();
   var dbAds = db.ref('/ads'); // shorthand for data = db.re() &  data.child('ads')
+  var dbUsers = db.ref('/users'); // Shorthand for Users
 
   dbAds.on('value', function(ads) {
     // FIRST GET THE SNAPSHOP FROM THE DB -- THIS IS AN OBJECT
@@ -151,6 +155,43 @@ $(document).ready(function() {
         });
     }
   }
+
+  // ================================
+  // =========deleteAd function========
+  // ================================
+
+  function deleteAd(currentAd) {
+    var adID = currentAd;
+    var adRef = dbRef.child(adID);
+
+    adRef.once('value').then(function(snapshot) {
+      var sv = snapshot.val();
+      var imageURL = sv.imageURL;
+
+      adRef
+        .remove()
+        .then(function() {
+          console.log('Ad successfully removed.');
+          deleteImage(imageURL);
+        })
+        .catch(function(err) {
+          console.log('Error in deleting ad:' + err);
+        });
+    });
+  }
+
+  function deleteImage(imageURL) {
+    var imageRef = store.ref(imageURL);
+    imageRef
+      .delete()
+      .then(function() {
+        console.log('Image successfully deleted.');
+      })
+      .catch(function(err) {
+        console.log('Error in deleting image:' + err);
+      });
+  }
+
   // ================================
   // ======= Authentication =========
   // ================================
@@ -221,6 +262,10 @@ $(document).ready(function() {
       })
       .catch(function(error) {
         // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
       });
   });
 
@@ -236,10 +281,35 @@ $(document).ready(function() {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, pwd)
+      .then(function() {
+        email = email;
+        fName = $('#fName')
+          .val()
+          .trim();
+        lName = $('#lName')
+          .val()
+          .trim();
+        phone = $('#phone')
+          .val()
+          .trim();
+        firebase
+          .database()
+          .ref('/users')
+          .push({
+            email: email,
+            fName: fName,
+            lName: lName,
+            phone: phone,
+            userAds: userAds,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          });
+      })
       .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
         // ...
       });
   });
