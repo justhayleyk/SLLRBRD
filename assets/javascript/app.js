@@ -150,6 +150,17 @@ $(document).ready(function() {
     }
   }
 
+  // ================================
+  // =========PostAd function========
+  // ================================
+
+  function deleteAd(currentAd) {
+    var adID = currentAd;
+    var adRef = dbRef.child(adID);
+
+    adRef.once('value');
+  }
+
   function deleteImage(imageURL) {
     var imageRef = store.ref(imageURL);
     imageRef
