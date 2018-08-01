@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,27 +12,18 @@
   <!-- CSS Framework -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
   <!-- Style Sheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+  <!-- etsyAPI -->
+  <!-- <script src="etsyAPI.js"></script> -->
   <!-- app.js file -->
   <!-- <script src="assets/javascript/app.js"></script> -->
-  <script src="assets/javascript/individualAd.js"></script>
+
 
   <title>Project #1</title>
-
-  <script>
-
-    // var urlParams = new URLSearchParams(window.location.search);
-
-    // console.log(urlParams.has('postid')); // true
-    // console.log(urlParams.get('postid')); // "edit"
-
-
-  </script>
-
 </head>
 
 <body>
@@ -41,37 +33,46 @@
         <img style="width: 250px;" id="logo" src="assets/images/Sllrbrd.png" alt="SLLRBRD Logo">
       </div>
       <div class="right item">
-        <a href="login.html" class="item">
+        <a class="item">
           Login
         </a>
-        <a href="createAccount.html" class="item">
+        <a class="item">
           Sign Up
         </a>
-        <a href="postAnAd.html" class="item">
+        <a class="item">
           Post An Ad
         </a>
-        <a href="MyAds.html" class="item">
+        <a class="item">
           My Ads
         </a>
       </div>
     </div>
 
   </div>
-
+  <br>
   <div class="ui container">
-
-
-
-    <div class="individualAd ui grid">
-
+    <div class="ui raised very padded text container segment">
+      <form class="ui form">
+        <div class="field">
+          <label>Title</label>
+          <input type="text" name="title" placeholder="Title">
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <input type="text" name="description" placeholder="Description">
+        </div>
+        <div class="field">
+          <label>Asking Price</label>
+          <input type="text" name="price" placeholder='Price'>
+        </div>
+        <div class="fluid ui button">Upload File</div>
+        <br>
+        <div class="fluid ui button">Submit</div>
     </div>
+    <br>
+    </form>
 
-
-
-
-
-
-
+  </div>
   </div>
 
   <!-- Footer -->
@@ -93,7 +94,6 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-
 </body>
 
 </html>
