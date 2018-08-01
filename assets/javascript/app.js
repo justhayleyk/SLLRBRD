@@ -47,9 +47,13 @@ $(document).ready(function() {
   var postprice;
   var postuserID;
   var html = '';
+  var fName = '';
+  var lName = '';
+  var phone = '';
 
   var db = firebase.database();
   var dbAds = db.ref('/ads'); // shorthand for data = db.re() &  data.child('ads')
+  var dbUsers = db.ref('/users'); // Shorthand for Users
 
   dbAds.on('value', function(ads) {
     // FIRST GET THE SNAPSHOP FROM THE DB -- THIS IS AN OBJECT
@@ -149,6 +153,10 @@ $(document).ready(function() {
       })
       .catch(function(error) {
         // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
       });
   });
 
@@ -164,10 +172,26 @@ $(document).ready(function() {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, pwd)
+      .then(function() {
+        email = $('#email')
+          .val()
+          .trim();
+        fName = $('#fName')
+          .val()
+          .trim();
+        lLame = $('#LName')
+          .val()
+          .trim();
+        phone = $('#phone')
+          .val()
+          .trim();
+      })
       .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
         // ...
       });
   });
