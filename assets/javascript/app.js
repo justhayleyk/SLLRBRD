@@ -25,9 +25,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     $('#logout').attr('style', '');
     $('#email').val(user.email);
     sessionUser = user;
+    displayNav(true);
     // CONTROL REDIRECT AFTER SUCCESSFUL AUTHENTICATION
     // window.location = 'index.html'; //After successful login, user will be redirected to home.html
   } else {
+    displayNav(false);
     // No user is signed in.
     $('#logout').attr('style', 'display:none');
     $('#signUp, #login, #password').attr('style', '');
@@ -244,3 +246,18 @@ $(document).ready(function() {
 
   // bottom of on document ready
 });
+
+function displayNav(x) {
+  console.log(x);
+  var html = '';
+  if (x === true) {
+    // User who is signed in
+    html =
+      '<a href="login.html" class="item">Logout</a><a href="postAnAd.html" class="item">Post An Ad</a>';
+  } else {
+    // No User
+    html =
+      '<a href="login.html" class="item">Login</a><a href="createAccount.html" class="item">Create an Account</a><a href="createAccount.html" class="item">Post An Ad (Registered Users Only)</a>';
+  }
+  $('#nav').html(html);
+}
