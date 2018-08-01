@@ -149,6 +149,19 @@ $(document).ready(function() {
         });
     }
   }
+
+  function deleteImage(imageURL) {
+    var imageRef = store.ref(imageURL);
+    imageRef
+      .delete()
+      .then(function() {
+        console.log('Image successfully deleted.');
+      })
+      .catch(function(err) {
+        console.log('Error in deleting image:' + err);
+      });
+  }
+
   // ================================
   // ======= Authentication =========
   // ================================
