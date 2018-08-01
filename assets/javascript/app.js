@@ -158,17 +158,20 @@ $(document).ready(function() {
     var adID = currentAd;
     var adRef = dbRef.child(adID);
 
-    adRef.once('value').then(function (snapshot) {
-
+    adRef.once('value').then(function(snapshot) {
       var sv = snapshot.val();
       var imageURL = sv.imageURL;
 
-      adRef.remove().then(function () {
-
-        console.log('Ad successfully removed.');
-        deleteImage(imageURL);
-
-      });
+      adRef
+        .remove()
+        .then(function() {
+          console.log('Ad successfully removed.');
+          deleteImage(imageURL);
+        })
+        .catch(function(err) {
+          console.log('Error in deleting ad:' + err);
+        });
+    });
   }
 
   function deleteImage(imageURL) {
