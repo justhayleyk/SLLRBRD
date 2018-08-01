@@ -151,7 +151,7 @@ $(document).ready(function() {
   }
 
   // ================================
-  // =========PostAd function========
+  // =========deleteAd function========
   // ================================
 
   function deleteAd(currentAd) {
