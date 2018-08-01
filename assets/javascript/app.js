@@ -173,18 +173,27 @@ $(document).ready(function() {
       .auth()
       .createUserWithEmailAndPassword(email, pwd)
       .then(function() {
-        email = $('#email')
-          .val()
-          .trim();
+        email = email;
         fName = $('#fName')
           .val()
           .trim();
-        lLame = $('#LName')
+        lName = $('#lName')
           .val()
           .trim();
         phone = $('#phone')
           .val()
           .trim();
+        firebase
+          .database()
+          .ref('/users')
+          .push({
+            email: email,
+            fName: fName,
+            lName: lName,
+            phone: phone,
+            userAds: userAds,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          });
       })
       .catch(function(error) {
         // Handle Errors here.
