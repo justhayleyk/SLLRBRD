@@ -1,3 +1,7 @@
+body {
+  background-color: whitesmoke;
+}
+
 .pusher {
   margin-bottom: 20px;
 }
@@ -14,4 +18,15 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.ui.footer img {
+  max-width: 55px;
+}
+
+.ui.sticky.footer.segment {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0;
 }
