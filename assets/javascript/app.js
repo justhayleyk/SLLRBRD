@@ -290,11 +290,11 @@ function displayNav(x) {
   if (x === true) {
     // User who is signed in
     html =
-      '<a href="MyAds.html" class="item">My Ads</a><a href="postAnAd.html" class="item">Post An Ad</a><a href="login.html" class="item">Logout</a>';
+      '<a href="index.html" class="item">Home</a><a href="MyAds.html" class="item">My Ads</a><a href="postAnAd.html" class="item">Post An Ad</a><a href="login.html" class="item">Logout</a>';
   } else {
     // No User
     html =
-      '<a href="login.html" class="item">Login</a><a href="createAccount.html" class="item">Create an Account</a><a href="createAccount.html" class="item">Post An Ad (Registered Users Only)</a>';
+      '<a href="index.html" class="item">Home</a><a href="login.html" class="item">Login</a><a href="createAccount.html" class="item">Create an Account</a><a href="createAccount.html" class="item">Post An Ad (Registered Users Only)</a>';
   }
   $('#nav').html(html);
 }

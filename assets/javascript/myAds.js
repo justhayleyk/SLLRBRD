@@ -1,16 +1,3 @@
-// Initialize Firebase
-// var config = JSON.parse(localStorage.getItem('sbConfig'));
-var config = {
-  apiKey: 'AIzaSyDcOMILm8F_Mx8SD8B-SYkgGTxnTQ4nFXE',
-  authDomain: 'sb-sllrbrd.firebaseapp.com',
-  databaseURL: 'https://sb-sllrbrd.firebaseio.com',
-  projectId: 'sb-sllrbrd',
-  storageBucket: 'sb-sllrbrd.appspot.com',
-  messagingSenderId: '407280221848'
-};
-
-firebase.initializeApp(config);
-
 // Global Variable Declarations
 var email = ''; // email for authentication
 var pwd = ''; // pwd for authentication
