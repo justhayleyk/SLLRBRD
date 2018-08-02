@@ -119,10 +119,9 @@ $(document).ready(function() {
       price.length > 0
     ) {
       var adID = dbRef.push().key;
-      var imgPath = '/images/' + adID + '/';
       var fileName = file.name;
-      var imgURL = imgPath + fileName;
-      var sRef = store.ref(imgURL);
+      var imgPath = '/images/' + adID + '/' + fileName;
+      var sRef = store.ref(imgPath);
 
       sRef
         .put(file)
@@ -138,6 +137,7 @@ $(document).ready(function() {
             userID: userID,
             title: title,
             imageURL: imageURL,
+            storagePath: imgPath,
             description: description,
             price: price,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -154,42 +154,6 @@ $(document).ready(function() {
           console.log('Error:' + error);
         });
     }
-  }
-
-  // ================================
-  // =========deleteAd function========
-  // ================================
-
-  function deleteAd(currentAd) {
-    var adID = currentAd;
-    var adRef = dbRef.child(adID);
-
-    adRef.once('value').then(function(snapshot) {
-      var sv = snapshot.val();
-      var imageURL = sv.imageURL;
-
-      adRef
-        .remove()
-        .then(function() {
-          console.log('Ad successfully removed.');
-          deleteImage(imageURL);
-        })
-        .catch(function(err) {
-          console.log('Error in deleting ad:' + err);
-        });
-    });
-  }
-
-  function deleteImage(imageURL) {
-    var imageRef = store.ref(imageURL);
-    imageRef
-      .delete()
-      .then(function() {
-        console.log('Image successfully deleted.');
-      })
-      .catch(function(err) {
-        console.log('Error in deleting image:' + err);
-      });
   }
 
   // ================================
