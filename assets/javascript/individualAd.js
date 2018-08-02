@@ -1,18 +1,18 @@
 var urlParams = new URLSearchParams(window.location.search);
 
-console.log(urlParams.has("postid")); // true
-console.log(urlParams.get("postid")); // "edit"
+console.log(urlParams.has('postid')); // true
+console.log(urlParams.get('postid')); // "edit"
 
 $(document).ready(function() {
   // Initialize Firebase
   // var config = JSON.parse(localStorage.getItem('sbConfig'));
   var config = {
-    apiKey: "AIzaSyDcOMILm8F_Mx8SD8B-SYkgGTxnTQ4nFXE",
-    authDomain: "sb-sllrbrd.firebaseapp.com",
-    databaseURL: "https://sb-sllrbrd.firebaseio.com",
-    projectId: "sb-sllrbrd",
-    storageBucket: "sb-sllrbrd.appspot.com",
-    messagingSenderId: "407280221848"
+    apiKey: 'AIzaSyDcOMILm8F_Mx8SD8B-SYkgGTxnTQ4nFXE',
+    authDomain: 'sb-sllrbrd.firebaseapp.com',
+    databaseURL: 'https://sb-sllrbrd.firebaseio.com',
+    projectId: 'sb-sllrbrd',
+    storageBucket: 'sb-sllrbrd.appspot.com',
+    messagingSenderId: '407280221848'
   };
 
   firebase.initializeApp(config);
@@ -27,30 +27,35 @@ $(document).ready(function() {
   var posttitle;
   var postprice;
   var postuserID;
-  var html = "";
+  var html = '';
 
   var db = firebase.database();
-  var dbPost = db.ref("/ads/" + urlParams.get("postid")); // shorthand for data = db.re() &  data.child('ads')
+  var dbPost = db.ref('/ads/' + urlParams.get('postid')); // shorthand for data = db.re() &  data.child('ads')
 
-  dbPost.on("value", function(ad) {
+  dbPost.on('value', function(ad) {
     postID = ad.key;
     postimageURL = ad.val().imageURL;
     postdescription = ad.val().description;
     posttitle = ad.val().title;
     postprice = ad.val().price;
     postuserID = ad.val().userID;
+    postPhone = ad.val().phone;
 
     html =
       '<div class="row"><div class="six wide column"><img class="ui large rounded image" src="' +
       postimageURL +
       '" alt="Ad Image"></div><div class="eight wide column"><h2>' +
       posttitle +
-      "</h2><p>" +
+      '</h2><p>' +
       postdescription +
       '</p><h3>Price:<span id="price">' +
       postprice +
-      '</span></h3><br><div class="ui link items"><div class="item"><a class="ui tiny circular image"><img src="assets/images/userimage.png"></a><div class="content"><h3>Randall Dow</h3><div class="description"><p>Contact:</p><div class="ui buttons"><button class="ui button">Call</button><div class="or"></div><button class="ui positive button">Email</button></div></div></div></div></div></div></div><div class="row"></div>';
-    $(".individualAd").append(html);
+      '</span></h3><br><div class="ui link items"><div class="item"><a class="ui tiny circular image"><img src="assets/images/userimage.png"></a><div class="content"><h3>Randall Dow</h3><div class="description"><p>Contact:</p><div class="ui buttons"><a href="tel:' +
+      postPhone +
+      '"class="ui button">Call</a><div class="or"></div><a href="mailto:' +
+      postuserID +
+      '"class="ui positive button">Email</a></div></div></div></div></div></div></div><div class="row"></div>';
+    $('.individualAd').append(html);
   });
 
   // bottom of on document ready
