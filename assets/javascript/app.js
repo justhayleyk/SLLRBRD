@@ -175,9 +175,6 @@ $(document).ready(function() {
         lName = $('#lName')
           .val()
           .trim();
-        phone = $('#phone')
-          .val()
-          .trim();
         firebase
           .database()
           .ref('/users')
@@ -185,7 +182,6 @@ $(document).ready(function() {
             email: email,
             fName: fName,
             lName: lName,
-            phone: phone,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
         alert(
