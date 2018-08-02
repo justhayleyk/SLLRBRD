@@ -91,7 +91,7 @@ $(document).ready(function() {
 
   $('#submitAd').on('click', function() {
     event.preventDefault();
-    postAd(sessionUser);
+    postAd(sessionUser.email);
   });
 
   function postAd(currentUser) {
