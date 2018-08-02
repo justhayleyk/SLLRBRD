@@ -82,6 +82,83 @@ $(document).ready(function() {
   });
 
   // ================================
+  // =========PostAd function========
+  // ================================
+
+  $('#submitAd').on('click', function() {
+    event.preventDefault();
+    postAd(sessionUser.email);
+  });
+
+  function postAd(currentUser) {
+    var userID = currentUser;
+    var dbRef = db.ref('ads');
+    var title = $('#title')
+      .val()
+      .trim();
+    var description = $('#description')
+      .val()
+      .trim();
+    var price = $('#price')
+      .val()
+      .trim();
+    var phone = $('#phone')
+      .val()
+      .trim();
+    var file = $('#image').get(0).files[0];
+    var imgName = $('#image')
+      .val()
+      .trim();
+
+    if (
+      userID.length > 0 &&
+      title.length > 0 &&
+      imgName.length > 0 &&
+      description.length > 0 &&
+      price.length > 0
+    ) {
+      var adID = dbRef.push().key;
+      var fileName = file.name;
+      var imgPath = '/images/' + adID + '/' + fileName;
+      var sRef = store.ref(imgPath);
+
+      sRef
+        .put(file)
+        .then(function() {
+          // console.log('Image upload successful');
+          return sRef.getDownloadURL();
+        })
+        .then(function(imageURL) {
+          // console.log('url:' + imageURL);
+          // console.log('Download URL acquired successfully');
+
+          var ad = {
+            userID: userID,
+            title: title,
+            imageURL: imageURL,
+            storagePath: imgPath,
+            description: description,
+            price: price,
+            phone: phone,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          };
+
+          var adRef = dbRef.child(adID);
+          adRef.update(ad);
+        })
+        .then(function() {
+          alert('Successfully saved to database.');
+          $('#postForm')[0].reset();
+        })
+        .catch(function(error) {
+          alert('Error:' + error);
+        });
+    } else {
+      alert('Please fill out all fields including an image');
+    }
+  }
+
+  // ================================
   // ======= Authentication =========
   // ================================
   $('.ui.form').form({
@@ -182,6 +259,7 @@ $(document).ready(function() {
             email: email,
             fName: fName,
             lName: lName,
+            phone: phone,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
         alert(
