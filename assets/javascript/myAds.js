@@ -64,8 +64,10 @@ $(document).ready(function() {
         span.text('[' + currentAd.key + ']' + ' ===> ' + currentAd.val().title);
         row.append(span);
         row.append(btn);
-
+        var html =
+          '<div><h3 id="title">" + title + "</h3><button id="edit" class="ui left attached button">Edit</button><button id="delete" class="right attached ui button">Delete</button></div>';
         $('.usersAd').append(row);
+        $('.usersAd').append(html);
       }
     });
   }
