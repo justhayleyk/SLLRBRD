@@ -152,7 +152,7 @@ $(document).ready(function() {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
-        console.log(errorMessage);
+        alert(errorMessage);
       });
   });
 
@@ -188,13 +188,17 @@ $(document).ready(function() {
             phone: phone,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
+        alert(
+          'Account successfully created! You will be re-directed to the home page'
+        );
+        window.location = 'index.html'; //After successful Signup, user will be redirected to home.html
       })
       .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
-        console.log(errorMessage);
+        alert(errorMessage);
         // ...
       });
   });
