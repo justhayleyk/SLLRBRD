@@ -21,19 +21,15 @@ var sessionUser; // Obhject to get Session User Details
 // REAL-TIME LISTENER
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    $('#login, #signUp, #password').attr('style', 'display:none');
-    $('#logout').attr('style', '');
+    // user is signed in.
+    displayLogin(true);
     $('#email').val(user.email);
     sessionUser = user;
     displayNav(true);
-    // CONTROL REDIRECT AFTER SUCCESSFUL AUTHENTICATION
-    // window.location = 'index.html'; //After successful login, user will be redirected to home.html
   } else {
-    displayNav(false);
     // No user is signed in.
-    $('#logout').attr('style', 'dis   play:none');
-    $('#signUp, #login, #password').attr('style', '');
-    $('#email').val('');
+    displayNav(false);
+    displayLogin(false);
   }
 });
 
@@ -86,6 +82,7 @@ $(document).ready(function() {
   });
 
   // ================================
+<<<<<<< HEAD
   // =========PostAd function========
   // ================================
 
@@ -163,6 +160,8 @@ $(document).ready(function() {
   }
 
   // ================================
+=======
+>>>>>>> master
   // ======= Authentication =========
   // ================================
   $('.ui.form').form({
@@ -193,8 +192,7 @@ $(document).ready(function() {
   });
 
   // LOGIN LISTENER
-  $('#login').click(function(event) {
-    event.preventDefault();
+  $(document).on('click', '#login', function() {
     email = $('#email')
       .val()
       .trim();
@@ -222,8 +220,7 @@ $(document).ready(function() {
   });
 
   // LOGOUT LISTENER
-  $('#logout').click(function(event) {
-    event.preventDefault();
+  $(document).on('click', '#logout', function() {
     firebase
       .auth()
       .signOut()
@@ -235,13 +232,12 @@ $(document).ready(function() {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
-        console.log(errorMessage);
+        alert(errorMessage);
       });
   });
 
   // SIGN UP  LISTENER
-  $('#signUp').click(function(event) {
-    event.preventDefault();
+  $(document).on('click', '#signUp', function() {
     email = $('#email')
       .val()
       .trim();
@@ -259,9 +255,6 @@ $(document).ready(function() {
         lName = $('#lName')
           .val()
           .trim();
-        phone = $('#phone')
-          .val()
-          .trim();
         firebase
           .database()
           .ref('/users')
@@ -269,19 +262,97 @@ $(document).ready(function() {
             email: email,
             fName: fName,
             lName: lName,
+<<<<<<< HEAD
             phone: phone,
+=======
+>>>>>>> master
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
+        alert(
+          'Account successfully created! You will be re-directed to the home page'
+        );
+        window.location = 'index.html'; //After successful Signup, user will be redirected to home.html
       })
       .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
-        console.log(errorMessage);
+        alert(errorMessage);
         // ...
       });
   });
+
+  // ================================
+  // =========PostAd function========
+  // ================================
+
+  $('#submitAd').on('click', function() {
+    event.preventDefault();
+    postAd(sessionUser.email);
+  });
+
+  function postAd(currentUser) {
+    var userID = currentUser;
+    var dbRef = db.ref('ads');
+    var title = $('#title')
+      .val()
+      .trim();
+    var description = $('#description')
+      .val()
+      .trim();
+    var price = $('#price')
+      .val()
+      .trim();
+    var file = $('#image').get(0).files[0];
+    var imgName = $('#image')
+      .val()
+      .trim();
+
+    if (
+      userID.length > 0 &&
+      title.length > 0 &&
+      imgName.length > 0 &&
+      description.length > 0 &&
+      price.length > 0
+    ) {
+      var adID = dbRef.push().key;
+      var fileName = file.name;
+      var imgPath = '/images/' + adID + '/' + fileName;
+      var sRef = store.ref(imgPath);
+
+      sRef
+        .put(file)
+        .then(function() {
+          console.log('Image upload successful');
+          return sRef.getDownloadURL();
+        })
+        .then(function(imageURL) {
+          console.log('url:' + imageURL);
+          console.log('Download URL acquired successfully');
+
+          var ad = {
+            userID: userID,
+            title: title,
+            imageURL: imageURL,
+            storagePath: imgPath,
+            description: description,
+            price: price,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+          };
+
+          var adRef = dbRef.child(adID);
+          adRef.update(ad);
+        })
+        .then(function() {
+          console.log('Successfully saved to database.');
+          $('#postForm')[0].reset();
+        })
+        .catch(function(error) {
+          console.log('Error:' + error);
+        });
+    }
+  }
 
   // bottom of on document ready
 });
@@ -302,4 +373,21 @@ function displayNav(x) {
       '<a href="index.html" class="item">Home</a><a href="login.html" class="item">Login</a><a href="createAccount.html" class="item">Create an Account</a><a href="createAccount.html" class="item">Post An Ad (Registered Users Only)</a>';
   }
   $('#nav').html(html);
+}
+
+// ==============================
+// ========= Login Page =========
+// ==============================
+function displayLogin(x) {
+  var html = '';
+  if (x === true) {
+    // User who is signed in
+    html =
+      '<div class="ui stacked segment"><div class="field"><div class="ui left icon input"><i class="user icon"></i><input type="text" id="email" name="email" placeholder="E-mail address "></div></div><div class="field"><button id="logout" class="ui fluid large primary secondary button">Logout</button></div></div><div class="ui message"><a href="index.html">Home</a></div></div>';
+  } else {
+    // No User
+    html =
+      '<div class="ui stacked segment"><div class="field"><div class="ui left icon input"><i class="user icon "></i><input type="text" id="email" name="email" placeholder="E-mail address"></div></div><div class="field "><div class="ui left icon input "><i class="lock icon "></i><input type="password" id="password" name="password " placeholder="Password" style=""></div></div><div class="field "><button id="login" class="ui fluid large primary submit button" style="">Login</button></div></div><div class="ui error message "></div><div class="ui message"><div class="ui message "><a href="index.html">Home</a></div><div class="ui message"><a href="createAccount.html">Sign Up</a></div></div>';
+  }
+  $('#loginForm').html(html);
 }
