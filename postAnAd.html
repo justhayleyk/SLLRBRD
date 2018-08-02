@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Fonts -->
-  <!-- Reset -->
-  <link rel="stylesheet" href="assets/css/reset.css">
   <!-- CSS Framework -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
   <!-- Style Sheet -->
@@ -30,7 +28,9 @@
   <div class="pusher">
     <div class="ui menu">
       <div class="header item">
-        <img style="width: 250px;" id="logo" src="assets/images/Sllrbrd-FINAL.png" alt="SLLRBRD Logo">
+        <a href="index.html">
+          <img style="width: 250px;" id="logo" src="assets/images/Sllrbrd-FINAL.png" alt="SLLRBRD Logo">
+        </a>
       </div>
       <div class="right item" id="nav">
         <!-- Nav will get filled in here-->
@@ -44,20 +44,20 @@
       <form class="ui form">
         <div class="field">
           <label>Title</label>
-          <input type="text" name="title" placeholder="Title">
+          <input id="title" type="text" name="title" placeholder="Title">
         </div>
         <div class="field">
           <label>Description</label>
-          <input type="text" name="description" placeholder="Description">
+          <input id="description" type="text" name="description" placeholder="Description">
         </div>
         <div class="field">
           <label>Asking Price</label>
-          <input type="text" name="price" placeholder='Price'>
+          <input id="price" type="text" name="price" placeholder='Price'>
         </div>
-        <input type="file" id="real-file">
+        <input id="image" type="file">
       </form>
       <br>
-      <button class="fluid ui button">Submit</button>
+      <button type="submit" class="fluid ui button" id="submitAd">Submit</button>
     </div>
   </div>
   </form>
@@ -67,8 +67,8 @@
   <div class="ui inverted vertical footer segment">
     <div class="ui container">
       <div class="ui grid">
-        <div class="four wide column">
-          <img src="assets/images/smallLogo-FINAL.png" alt="">
+        <div class="ui small image four wide column">
+          <img class="ui small image" src="assets/images/smallLogo-FINAL.png" alt="logo">
         </div>
         <div class="two wide column"></div>
         <div class="ten wide column">
