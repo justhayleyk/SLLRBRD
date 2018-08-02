@@ -264,7 +264,6 @@ $(document).ready(function() {
             fName: fName,
             lName: lName,
             phone: phone,
-            userAds: userAds,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
       })
