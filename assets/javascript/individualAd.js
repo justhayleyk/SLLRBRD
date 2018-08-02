@@ -39,6 +39,7 @@ $(document).ready(function() {
     posttitle = ad.val().title;
     postprice = ad.val().price;
     postuserID = ad.val().userID;
+    postPhone = ad.val().phone;
 
     html =
       '<div class="row"><div class="six wide column"><img class="ui large rounded image" src="' +
@@ -49,7 +50,11 @@ $(document).ready(function() {
       postdescription +
       '</p><h3>Price:<span id="price">' +
       postprice +
-      '</span></h3><br><div class="ui link items"><div class="item"><a class="ui tiny circular image"><img src="assets/images/userimage.png"></a><div class="content"><h3>Randall Dow</h3><div class="description"><p>Contact:</p><div class="ui buttons"><button class="ui button">Call</button><div class="or"></div><button class="ui positive button">Email</button></div></div></div></div></div></div></div><div class="row"></div>';
+      '</span></h3><br><div class="ui link items"><div class="item"><a class="ui tiny circular image"><img src="assets/images/userimage.png"></a><div class="content"><h3>Randall Dow</h3><div class="description"><p>Contact:</p><div class="ui buttons"><a href="tel:' +
+      postPhone +
+      '"class="ui button">Call</a><div class="or"></div><a href="mailto:' +
+      postuserID +
+      '"class="ui positive button">Email</a></div></div></div></div></div></div></div><div class="row"></div>';
     $('.individualAd').append(html);
   });
 

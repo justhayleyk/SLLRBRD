@@ -106,6 +106,9 @@ $(document).ready(function() {
     var price = $('#price')
       .val()
       .trim();
+    var phone = $('#phone')
+      .val()
+      .trim();
     var file = $('#image').get(0).files[0];
     var imgName = $('#image')
       .val()
@@ -126,12 +129,12 @@ $(document).ready(function() {
       sRef
         .put(file)
         .then(function() {
-          console.log('Image upload successful');
+          // console.log('Image upload successful');
           return sRef.getDownloadURL();
         })
         .then(function(imageURL) {
-          console.log('url:' + imageURL);
-          console.log('Download URL acquired successfully');
+          // console.log('url:' + imageURL);
+          // console.log('Download URL acquired successfully');
 
           var ad = {
             userID: userID,
@@ -140,6 +143,7 @@ $(document).ready(function() {
             storagePath: imgPath,
             description: description,
             price: price,
+            phone: phone,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           };
 
@@ -147,12 +151,14 @@ $(document).ready(function() {
           adRef.update(ad);
         })
         .then(function() {
-          console.log('Successfully saved to database.');
+          alert('Successfully saved to database.');
           $('#postForm')[0].reset();
         })
         .catch(function(error) {
-          console.log('Error:' + error);
+          alert('Error:' + error);
         });
+    } else {
+      alert('Please fill out all fields including an image');
     }
   }
 
