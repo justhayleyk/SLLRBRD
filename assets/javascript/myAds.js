@@ -47,11 +47,13 @@ $(document).ready(function() {
       var currentUser = sessionUser.email;
       var currentAd = ad;
       var user = ad.val().userID;
+      var title = ad.val().title;
       if (user === currentUser) {
         var row = $('<div>');
-        row.addClass('six wide column');
+        row.addClass('10 wide column');
         var span = $('<span>');
         var btn = $('<button>');
+        var currentAdId = currentAd.key;
         btn.addClass('delBtn');
         btn.attr('id', currentAd.key);
         btn.text('Delete');
@@ -61,13 +63,11 @@ $(document).ready(function() {
           deleteAd(adID);
         });
 
-        span.text('[' + currentAd.key + ']' + ' ===> ' + currentAd.val().title);
+        span.text(currentAd.val().title + '         ');
         row.append(span);
         row.append(btn);
-        var html =
-          '<div><h3 id="title">" + title + "</h3><button id="edit" class="ui left attached button">Edit</button><button id="delete" class="right attached ui button">Delete</button></div>';
+
         $('.usersAd').append(row);
-        $('.usersAd').append(html);
       }
     });
   }
