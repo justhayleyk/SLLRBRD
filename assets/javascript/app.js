@@ -82,7 +82,6 @@ $(document).ready(function() {
   });
 
   // ================================
-<<<<<<< HEAD
   // =========PostAd function========
   // ================================
 
@@ -160,8 +159,6 @@ $(document).ready(function() {
   }
 
   // ================================
-=======
->>>>>>> master
   // ======= Authentication =========
   // ================================
   $('.ui.form').form({
@@ -262,10 +259,7 @@ $(document).ready(function() {
             email: email,
             fName: fName,
             lName: lName,
-<<<<<<< HEAD
             phone: phone,
-=======
->>>>>>> master
             dateAdded: firebase.database.ServerValue.TIMESTAMP
           });
         alert(
